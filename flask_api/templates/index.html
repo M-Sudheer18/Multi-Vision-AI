@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VisionClassify — Modern Image Classifier</title>
+  <meta name="description" content="Upload an image and get instant AI-powered classification results with confidence scores." />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- Flask dynamic link to your separated CSS file -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <header>
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2"/><path d="M3 17v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2"/><path d="M7 12h10"/></svg>
+        </div>
+        VisionClassify
+      </div>
+      <button class="nav-link how-it-works-btn" id="howItWorksBtn">
+        How it works
+      </button>
+    </header>
+
+    <section class="hero">
+      <div class="badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+        AI-powered image recognition
+      </div>
+      <h1>Classify any image<br><span>in seconds</span></h1>
+      <p>Drag, drop, or click to upload an image. Our model returns the top predictions with confidence scores.</p>
+    </section>
+
+    <section class="grid">
+      <!-- Upload Box -->
+      <div class="card">
+        <div class="card-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+          Upload image
+        </div>
+
+        <div id="uploadZone" class="upload-zone">
+          <input type="file" id="fileInput" class="sr-only" accept="image/*" />
+          <div class="upload-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+          </div>
+          <p class="upload-text">Drop your image here, or <span>browse</span></p>
+          <p class="upload-hint">Supports JPG, PNG, WebP up to 10MB</p>
+        </div>
+
+        <div id="previewWrap" class="preview-wrap" style="display: none;">
+          <button class="remove-btn" id="removeBtn" aria-label="Remove image">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+          <img id="previewImg" src="" alt="Preview" />
+          <div class="preview-meta">
+            <p id="fileName">image.jpg</p>
+            <span id="fileSize">0 MB</span>
+          </div>
+        </div>
+
+        <button class="btn" id="classifyBtn" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2"/><path d="M3 17v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2"/><path d="M7 12h10"/></svg>
+          Classify image
+        </button>
+      </div>
+
+      <!-- Results Box -->
+      <div class="card results-card">
+        <div class="card-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Classification results
+        </div>
+
+        <div id="emptyState" class="empty-state">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2"/><path d="M3 17v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2"/><path d="M7 12h10"/></svg>
+          <p>Upload an image and run classification to see results</p>
+        </div>
+
+        <div id="loadingState" class="empty-state" style="display: none;">
+          <div class="spinner spinner-dark"></div>
+          <p style="margin-top: 0.75rem; font-weight: 600; color: var(--foreground);">Analyzing image…</p>
+          <p style="font-size: 0.875rem;">Running inference on your model</p>
+        </div>
+
+        <div id="resultsState" style="display: none;">
+          <div class="top-result">
+            <small>Top prediction</small>
+            <h3 id="topLabel"></h3>
+            <p><span id="topConfidence"></span>% confidence</p>
+          </div>
+          <div id="resultsList"></div>
+          <button class="btn btn-outline" id="resetBtn">Classify another image</button>
+        </div>
+      </div>
+    </section>
+    
+    <footer>
+      <p>Built for fast, modern image classification.</p>
+    </footer>
+  </div>
+  <!-- How It Works Popup -->
+    <div id="howItWorksModal" class="how-it-works-modal">
+      <div class="how-it-works-overlay"></div>
+
+      <div class="how-it-works-popup">
+
+        <button id="closeHowItWorks" class="close-how-it-works" aria-label="Close">
+          &times;
+        </button>
+
+        <div class="how-it-works-header">
+          <span class="badge">How it works</span>
+
+          <h2>
+            From image upload to
+            <span>AI prediction</span>
+          </h2>
+
+          <p>
+            VisionClassify processes your image through a trained
+            deep learning model and returns the most likely category
+            along with confidence scores.
+          </p>
+        </div>
+
+        <div class="steps">
+
+          <!-- Step 1 -->
+          <div class="step-card">
+            <div class="step-number">01</div>
+
+            <h3>Upload an image</h3>
+
+            <p>
+              Select or drag and drop an image into the upload area.
+              Supported formats include JPG, PNG, and WebP.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="step-card">
+            <div class="step-number">02</div>
+
+            <h3>Image preprocessing</h3>
+
+            <p>
+              The image is converted to RGB, resized to 32×32 pixels,
+              and normalized before being passed to the model.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="step-card">
+            <div class="step-number">03</div>
+
+            <h3>AI model inference</h3>
+
+            <p>
+              Your uploaded image is sent to the trained CNN model,
+              which calculates probabilities for all 10 categories.
+            </p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="step-card">
+            <div class="step-number">04</div>
+            <h3>Get the prediction</h3>
+            <p>
+              The application displays the predicted category,
+              confidence score, and probability distribution for
+              all supported classes.
+            </p>
+          </div>
+        </div>
+        <!-- Supported Categories -->
+          <section class="categories">
+            <div class="card categories-card">
+              <div class="card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 16v-4"/>
+                  <path d="M12 8h.01"/>
+                </svg>
+                Supported image categories
+              </div>
+
+              <p class="categories-description">
+                This model is trained to classify images into the following
+                CIFAR-10 categories:
+              </p>
+
+              <div class="category-list">
+                <span>✈️ Airplane</span>
+                <span>🚗 Automobile</span>
+                <span>🐦 Bird</span>
+                <span>🐱 Cat</span>
+                <span>🦌 Deer</span>
+                <span>🐶 Dog</span>
+                <span>🐸 Frog</span>
+                <span>🐴 Horse</span>
+                <span>🚢 Ship</span>
+                <span>🚚 Truck</span>
+              </div>
+            </div>
+          </section>
+      </div>
+    </div>
+
+  <!-- Flask dynamic link to your separated JS file -->
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

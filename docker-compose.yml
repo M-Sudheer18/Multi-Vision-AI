@@ -1,0 +1,19 @@
+services:
+
+  flask_api:
+    build: .
+    container_name: image_classification_api
+    working_dir: /app/flask_api
+    command: flask run --host=0.0.0.0 --port=5000
+    ports:
+      - "5000:5000"
+
+  streamlit_app:
+    build: .
+    container_name: image_classification_streamlit
+    working_dir: /app/streamlit_app
+    command: streamlit run app.py --server.address=0.0.0.0 --server.port=8501
+    ports:
+      - "8501:8501"
+    depends_on:
+      - flask_api
