@@ -13,7 +13,7 @@ logger = get_logger(__name__)
 # Creates and configures the Flask application
 def create_app() -> Flask:
     app = Flask(
-        settings.APP_NAME,
+        __name__,
         template_folder="templates",
         static_folder="static"
     )
