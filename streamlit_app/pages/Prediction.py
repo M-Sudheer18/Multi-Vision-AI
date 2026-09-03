@@ -7,10 +7,14 @@ from components.prediction_card import render_prediction_card
 from components.probability_chart import render_probability_chart
 
 # Without Docker
-API_URL = "http://localhost:5000/api/v1/predict"
+# API_URL = "http://localhost:5000/api/v1/predict"
 
 # With Docker
 # API_URL = "http://flask_api:5000/api/v1/predict"
+
+# Deployed Link
+API_URL = "https://multivision-ai-api.onrender.com/api/v1/predict"
+
 def render_prediction_page():
     """Render the Image Prediction Page.."""
     st.markdown(
