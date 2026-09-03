@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify
 from flask_cors import CORS
 from src.config.settings import settings
@@ -38,8 +39,13 @@ def create_app() -> Flask:
     logger.info(f"{settings.APP_NAME} v{settings.APP_VERSION} Initialized Successfully..")
     return app
 
-# Run Locally
+# Run Locally / Production
 if __name__ == "__main__":
     app = create_app()
-    logger.info("Starting Flask Developements Server..")
-    app.run(host="0.0.0.0", port=5000, debug=settings.DEBUG)
+    logger.info("Starting Flask Server..")
+    port = int(os.environ.get("PORT", 5000))
+    app.run(
+        host="0.0.0.0",
+        port=port,
+        debug=settings.DEBUG
+    )
