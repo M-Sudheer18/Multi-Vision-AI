@@ -447,7 +447,7 @@ Prediction response
 
 Deployed via Streamlit Community Cloud, connected to the GitHub repository, with entry point `streamlit_app/app.py`.
 
-Application URL: **https://multivision-ai.streamlit.app** *(sample link — replace with your real deployed URL)*
+Application URL: **https://multi-vision-ai.streamlit.app/**
 
 ---
 
@@ -457,7 +457,7 @@ Application URL: **https://multivision-ai.streamlit.app** *(sample link — repl
 
 Deployed on **Render**.
 
-API URL: **https://multivision-ai-api.onrender.com** *(sample link — replace with your real deployed URL)*
+API URL: **https://multivision-ai-api.onrender.com/**
 
 ---
 
@@ -608,11 +608,11 @@ Repository URL: **https://github.com/sudheermuthyala/multivision-ai** *(sample l
 
 ## 🌐 Streamlit Application
 **Status:** ✅ Completed
-Application URL: **https://multivision-ai.streamlit.app** *(sample link — replace with your real deployed URL)*
+Application URL: **https://multi-vision-ai.streamlit.app/**
 
 ## ⚙️ Flask API
 **Status:** ✅ Completed
-API URL: **https://multivision-ai-api.onrender.com** *(sample link — replace with your real deployed URL)*
+API URL: **https://multivision-ai-api.onrender.com/**
 
 ## ☁️ AWS Deployment
 **Status:** 🔮 Optional / Future Enhancement

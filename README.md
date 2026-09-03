@@ -14,7 +14,7 @@ An AI-powered image classification application. Upload an image and instantly ge
 [![Status](https://img.shields.io/badge/Status-Deployed-brightgreen)]()
 [![License](https://img.shields.io/badge/License-MIT-lightgrey)]()
 
-[Live App](https://multivision-ai.streamlit.app) · [API](https://multivision-ai-api.onrender.com) · [Report](./REPORT.md) · [Issues](https://github.com/sudheermuthyala/multivision-ai/issues)
+[Live App](https://multi-vision-ai.streamlit.app/) · [API](https://multivision-ai-api.onrender.com/) · [Report](./REPORT.md) · [Issues](https://github.com/sudheermuthyala/multivision-ai/issues)
 
 </div>
 
@@ -24,7 +24,7 @@ An AI-powered image classification application. Upload an image and instantly ge
 
 **MultiVision AI** takes a trained TensorFlow CNN model and wraps it in a complete, production-style application. Upload an image, and the app validates it, preprocesses it, runs inference, and returns the predicted class with a confidence score and full probability distribution — all in real time.
 
-> Sample links above point to placeholder URLs. Replace them with your actual deployed endpoints.
+> Live App and API links above are the actual deployed endpoints. The GitHub repo link is a placeholder — update it once your repository is public.
 
 ---
 
@@ -302,8 +302,8 @@ docker builder prune -a
 
 | Component | Platform | Status | URL |
 |---|---|---|---|
-| Frontend | Streamlit Community Cloud | ✅ Deployed | `https://multivision-ai.streamlit.app` |
-| Backend | Render | ✅ Deployed | `https://multivision-ai-api.onrender.com` |
+| Frontend | Streamlit Community Cloud | ✅ Deployed | `https://multi-vision-ai.streamlit.app/` |
+| Backend | Render | ✅ Deployed | `https://multivision-ai-api.onrender.com/` |
 | Infrastructure | AWS (EC2 / ECS / App Runner) | 🔮 Optional / Future | — |
 
 **Environment-based configuration:**
