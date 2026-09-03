@@ -14,7 +14,7 @@ An AI-powered image classification application. Upload an image and instantly ge
 [![Status](https://img.shields.io/badge/Status-Deployed-brightgreen)]()
 [![License](https://img.shields.io/badge/License-MIT-lightgrey)]()
 
-[Live App](https://multi-vision-ai.streamlit.app/) · [API](https://multivision-ai-api.onrender.com/) · [Report](./REPORT.md) · [Issues](https://github.com/sudheermuthyala/multivision-ai/issues)
+[Live App](https://multi-vision-ai.streamlit.app/) · [API](https://multivision-ai-api.onrender.com/) · [Report](./REPORT.md) · [Issues](https://github.com/M-Sudheer18/Multi-Vision-AI/issues)
 
 </div>
 
@@ -24,7 +24,7 @@ An AI-powered image classification application. Upload an image and instantly ge
 
 **MultiVision AI** takes a trained TensorFlow CNN model and wraps it in a complete, production-style application. Upload an image, and the app validates it, preprocesses it, runs inference, and returns the predicted class with a confidence score and full probability distribution — all in real time.
 
-> Live App and API links above are the actual deployed endpoints. The GitHub repo link is a placeholder — update it once your repository is public.
+> Live App, API, and repository links above are the actual project endpoints.
 
 ---
 
@@ -150,7 +150,7 @@ MultiVision-AI/
 
 **1) Clone the repository**
 ```bash
-git clone https://github.com/sudheermuthyala/multivision-ai.git
+git clone https://github.com/M-Sudheer18/Multi-Vision-AI.git
 cd multivision-ai
 ```
 

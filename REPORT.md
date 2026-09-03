@@ -511,7 +511,7 @@ API_URL=https://your-backend-api-url
 
 **CORS Configuration** — Since the Streamlit frontend and Flask backend run on different domains after deployment, CORS is configured to allow secure cross-origin communication.
 
-**Model Availability** — The trained TensorFlow model is bundled with the backend so the deployed service can load the model, process uploads, run inference, and return results.
+**Model Availability** — The trained TensorFlow model is hosted on Hugging Face Hub. When the backend starts or receives its first prediction request, the model is downloaded via `hf_hub_download()` and cached locally for inference.
 
 ---
 
@@ -604,7 +604,7 @@ Users can upload an image and receive a full classification result including con
 
 ## 🔗 GitHub Repository
 **Status:** ✅ Completed
-Repository URL: **https://github.com/sudheermuthyala/multivision-ai** *(sample link — replace with your real repo URL)*
+Repository URL: **https://github.com/M-Sudheer18/Multi-Vision-AI**
 
 ## 🌐 Streamlit Application
 **Status:** ✅ Completed
